@@ -3,6 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import argparse
 
+
 def matchAB(fileA, fileB):
     # 读取图像数据
     imgA = cv2.imread(fileA)
@@ -25,6 +26,7 @@ def matchAB(fileA, fileB):
 
     plt.imshow(cv2.cvtColor(matched_image, cv2.COLOR_BGR2RGB))
     plt.show()
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
