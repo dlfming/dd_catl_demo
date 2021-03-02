@@ -4,13 +4,13 @@ import time
 
 if __name__ == '__main__':
     start = time.time()
-    i = 9
+    i = 2
     # refFilename = r"img/book01.jpg"
-    imReference = cv2.imread(r"img/image0{}-0.png".format(i), cv2.IMREAD_COLOR)
+    imReference = cv2.imread(r"img/image{}-0.png".format(i), cv2.IMREAD_COLOR)
 
     # Read image to be aligned
     # imFilename = r"img/battery_test_02.jpg"
-    im = cv2.imread(r"img/image0{}-1.png".format(i), cv2.IMREAD_COLOR)
+    im = cv2.imread(r"img/image{}-1.png".format(i), cv2.IMREAD_COLOR)
 
     # Registered image will be resotred in imReg.
     # The estimated homography will be stored in h.

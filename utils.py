@@ -66,14 +66,24 @@ def findDifferentImages(im1, im2):
     print("SSIM:{}".format(score))
     # diff = cv2.cvtColor(im2, cv2.COLOR_BGR2GRAY)
 
+    # diff = cv2.subtract(im1, im2)
+    # cv2.imshow('diff', diff)
+    # cv2.waitKey()
+    # cv2.destroyAllWindows()
+
     # 找到不同点的轮廓以致于我们可以在被标识为“不同”的区域周围放置矩形
     thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
-    cv2.imshow('diff', diff)
-    cv2.imshow('thresh', thresh)
-    cv2.waitKey()
-    cv2.destroyAllWindows()
+    # 开操作。扩大图像缺口
+    se = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3), (-1, -1))
+    binary = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, se)
 
-    contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    # cv2.imshow('diff', diff)
+    # cv2.imshow('thresh', thresh)
+    # cv2.imshow("binary", binary)
+    # cv2.waitKey()
+    # cv2.destroyAllWindows()
+
+    contours, hierarchy = cv2.findContours(binary.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     result = im2.copy()
     # 找到一系列区域，在区域周围放置矩形
